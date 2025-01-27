@@ -6,4 +6,9 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
+  runtimeConfig: {
+    mistralApiKey: '',
+    mistralApiEndpoint: '',
+    mistralAgentId: '',
+  },
 })

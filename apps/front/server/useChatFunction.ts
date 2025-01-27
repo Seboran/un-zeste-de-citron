@@ -17,12 +17,11 @@ interface ChatCompletionChunk {
 export function useChatFunction(
   variables: Partial<{
     apiKey: string
-    ENABLE_CHAT: string
     MISTRAL_API_ENDPOINT: string
     MISTRAL_AGENT_ID: string
   }>,
 ) {
-  async function post(request: Request): Promise<Response> {
+  async function post(request: Request) {
     /**
      * Gestion des erreurs de configuration
      */
@@ -30,40 +29,23 @@ export function useChatFunction(
     if (!variables.MISTRAL_API_ENDPOINT)
       throw new Error(`${MISTRAL_API_ENDPOINT_KEY} is not set on netlify or is empty`)
 
-    /**
-     * Désactivation du service si non configuré
-     */
-    if (!variables.ENABLE_CHAT)
-      return new Response(
-        JSON.stringify({
-          error: 'There is no chat ATM',
-        }),
-        {
-          status: 405,
-        },
-      )
     const requestBody = await request.json()
 
     if (!requestBody) {
-      return new Response(
-        JSON.stringify({
-          error: 'Request body is missing',
-        }),
-        { status: 400 },
-      )
+      throw new Error(`Request body is empty`)
     }
 
     /**
      * Début concret de la fonction
      */
-    const body = getReadableStream(
-      fetchMistralApi(variables.MISTRAL_API_ENDPOINT, requestBody.messages),
-    )
-    return new Response(body, {
-      headers: {
-        'Content-Type': 'text/event-stream',
+    const appendSchemaAndInstructions = requestBody.schema + ' ' + requestBody.instructions
+    const messages: ListeMessagesMistral = [
+      {
+        role: 'user',
+        content: appendSchemaAndInstructions,
       },
-    })
+    ]
+    return getReadableStream(fetchMistralApi(variables.MISTRAL_API_ENDPOINT, messages))
   }
 
   /**

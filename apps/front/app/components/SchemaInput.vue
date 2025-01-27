@@ -44,7 +44,11 @@
 import { ref } from 'vue'
 import { useFormStore } from '~/stores/form'
 
-const schema = ref('')
+const schema = ref(`const userSchema = z.object({
+  username: z.string().min(3).max(20),
+  email: z.string().email(),
+  age: z.number().min(18)
+});`)
 const instructions = ref('')
 const form = useFormStore()
 
