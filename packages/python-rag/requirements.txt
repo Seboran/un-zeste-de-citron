@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain-mistralai
+langchain-openai
+faiss-cpu
+tiktoken
+openai
+mistralai
+python-dotenv
+tenacity
