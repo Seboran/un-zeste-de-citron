@@ -10,9 +10,6 @@
           <div class="bg-white rounded-sm shadow-sm p-6">
             <InstructionsChat />
           </div>
-          <div class="bg-white rounded-sm shadow-sm p-6">
-            <FormPreview />
-          </div>
         </div>
 
         <!-- Right Column (Auto Width) -->

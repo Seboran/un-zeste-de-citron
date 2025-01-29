@@ -1,7 +1,5 @@
 <template>
   <div class="space-y-6">
-    <h2 class="text-lg font-medium text-orange-900">Generated Form</h2>
-    
     <div v-if="form.loading" class="text-center py-12 border border-orange-200 rounded-lg bg-orange-50/50">
       <svg class="animate-spin h-8 w-8 text-orange-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

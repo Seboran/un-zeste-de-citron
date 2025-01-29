@@ -1,5 +1,6 @@
+import { generateVuejsForm } from '@zeste/chat-api'
 import { defineStore } from 'pinia'
-import { z } from 'zod'
+import { API_GENERATE_CODE, API_GENERATE_TEST } from '../utils/EndpointConstants'
 
 interface GenerateFormParams {
   schema: string
@@ -16,36 +17,16 @@ export const useFormStore = defineStore('form', () => {
     error: null,
   })
 
+  const { generateForm: callApi } = generateVuejsForm({ api: API_GENERATE_CODE })
+
+  const { decodeStream } = useDecodeStream(toRef(state, 'vueCode'))
+
   async function generateForm({ schema, instructions }: GenerateFormParams) {
     state.loading = true
     state.error = null
 
     try {
-      const response = await fetch('/api/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ schema, instructions }),
-      })
-
-      if (!response.body) {
-        console.error('No response body from the SSE endpoint')
-        return
-      }
-
-      const reader = response.body.getReader()
-      const decoder = new TextDecoder()
-      let done = false
-
-      while (!done) {
-        const { value, done: readerDone } = await reader.read()
-        done = readerDone
-        if (value) {
-          state.vueCode += decoder.decode(value)
-        }
-      }
-      await generateTestForm({ schema })
+      await decodeStream(await callApi({ schema, instructions }))
     } catch (error) {
       console.error('Error while fetching Mistral AI response:', error)
       state.vueCode =
@@ -56,36 +37,13 @@ export const useFormStore = defineStore('form', () => {
     }
   }
 
+  const { generateForm: callTestApi } = generateVuejsForm({ api: API_GENERATE_TEST })
+  const { decodeStream: decodeStreamTest } = useDecodeStream(toRef(state, 'tests'))
+
   async function generateTestForm({ schema }: { schema: string }) {
-    state.loading = true
-    state.error = null
-
-    console.log(schema, state.vueCode)
+    console.log('yo')
     try {
-      const response = await fetch('/api/test', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ schema, instructions: state.vueCode }),
-      })
-
-      if (!response.body) {
-        console.error('No response body from the SSE endpoint')
-        return
-      }
-
-      const reader = response.body.getReader()
-      const decoder = new TextDecoder()
-      let done = false
-
-      while (!done) {
-        const { value, done: readerDone } = await reader.read()
-        done = readerDone
-        if (value) {
-          state.tests += decoder.decode(value)
-        }
-      }
+      await decodeStreamTest(await callTestApi({ schema, instructions: state.vueCode }))
     } catch (error) {
       console.error('Error while fetching Mistral AI response:', error)
       state.tests = "Mon chatbot a un peu du mal 💀. N'hésitez pas à naviguer via le menu en haut !"
@@ -95,9 +53,15 @@ export const useFormStore = defineStore('form', () => {
     }
   }
 
+  function reset() {
+    state.vueCode = ''
+    state.tests = ''
+  }
+
   return {
     generateForm,
     generateTestForm,
+    reset,
     vueCode: computed(() => state.vueCode),
     error: computed(() => state.error),
     loading: computed(() => state.error),

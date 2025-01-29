@@ -1,5 +1,5 @@
 {
-  "name": "zeste",
+  "name": "@zeste/front",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,17 +11,18 @@
     "test": "vitest"
   },
   "dependencies": {
-    "nuxt": "^3.13.0",
-    "zod": "^3.22.4",
-    "@vueuse/core": "^10.7.0",
     "@pinia/nuxt": "^0.5.1",
-    "pinia": "^2.1.7",
+    "@vueuse/core": "^10.7.0",
+    "@zeste/chat-api": "workspace:*",
     "highlight.js": "^11.9.0",
-    "marked": "^12.0.0"
+    "marked": "^12.0.0",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.1.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.10.1",
-    "vitest": "^1.0.4",
-    "@vue/test-utils": "^2.4.3"
+    "@vue/test-utils": "^2.4.3",
+    "vitest": "^1.0.4"
   }
 }

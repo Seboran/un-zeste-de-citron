@@ -11,7 +11,7 @@
         <h3 class="text-sm font-medium text-orange-900">Live Preview</h3>
       </div>
       <div class="p-6">
-        <component :is="previewComponent" class="preview-sandbox" />
+        <!-- <component :is="previewComponent" class="preview-sandbox" /> -->
       </div>
     </div>
   </div>

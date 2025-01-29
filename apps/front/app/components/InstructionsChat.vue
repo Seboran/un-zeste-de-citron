@@ -81,12 +81,16 @@ const userSchema = z.object({
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useFormStore } from '~/stores/form'
 
 const step = ref(1)
-const schema = ref('')
+const schema = ref(`const userSchema = z.object({
+  username: z.string().min(3).max(20),
+  email: z.string().email(),
+  age: z.number().min(18)
+  });`)
 const instructions = ref('')
-const form = useFormStore()
+
+const {form, generateForm} = useGenerateForm(schema, instructions)
 
 const handleSchemaInput = () => {
   if (schema.value.length > 0 && step.value === 3) {
@@ -100,10 +104,4 @@ const handleInstructionsInput = () => {
   }
 }
 
-const generateForm = () => {
-  form.generateForm({
-    schema: schema.value,
-    instructions: instructions.value,
-  })
-}
 </script>
