@@ -1,17 +1,15 @@
 import os
-from langchain_community.document_loaders import TextLoader
-from langchain_mistralai.embeddings import MistralAIEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_core.prompts import ChatPromptTemplate
-from langchain.chains import create_retrieval_chain
-from langchain_mistralai.chat_models import ChatMistralAI
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from dotenv import load_dotenv
-import time
-import httpx
-from tenacity import retry, wait_exponential, stop_after_attempt
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import TextLoader
+from langchain_community.vectorstores import FAISS
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_mistralai.chat_models import ChatMistralAI
+from langchain_mistralai.embeddings import MistralAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from tenacity import retry, stop_after_attempt, wait_exponential
 
 
 def create_rag_system(
@@ -92,23 +90,25 @@ if not api_key:
         "NUXT_MISTRAL_API_KEY is missing. Set it in the .env file.")
 
 
-@retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(5))
-def invoke_with_retry(rag_system, input_data):
-    response = rag_system.invoke(input_data)
-    return response
-
-
 rag_system = create_rag_system(
     folder, embedding_model="mistral", llm_model="mistral", api_key=api_key)
-response = invoke_with_retry(rag_system, {"input": '''
-import { z } from "zod";
 
-export const registerSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email"),
-  age: z.number().min(18, "You must be at least 18"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
 
-'''})
-print(response["answer"])
+@retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(5))
+def invoke_rag(input_data):
+    response = rag_system.invoke({"input": input_data})
+    return response["answer"]
+
+
+# response = invoke_with_retry('''
+# import { z } from "zod";
+
+# export const registerSchema = z.object({
+#   name: z.string().min(1, "Name is required"),
+#   email: z.string().email("Invalid email"),
+#   age: z.number().min(18, "You must be at least 18"),
+#   password: z.string().min(6, "Password must be at least 6 characters"),
+# });
+
+# ''')
+# print(response)

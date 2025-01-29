@@ -1,0 +1,17 @@
+meta {
+  name: generate
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/generate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "schema": "export const usernameSchema = z.object({\n  username: z.string().min(1, \"Username is required\"),\n});"
+  }
+}
