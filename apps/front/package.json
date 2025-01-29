@@ -21,8 +21,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.10.1",
-    "@vue/test-utils": "^2.4.3",
-    "vitest": "^1.0.4"
+    "@nuxtjs/tailwindcss": "6.13.1",
+    "@vue/test-utils": "2.4.6",
+    "vitest": "1.6.0"
   }
 }

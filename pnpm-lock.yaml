@@ -46,14 +46,16 @@ importers:
         version: 3.24.1
     devDependencies:
       '@nuxtjs/tailwindcss':
-        specifier: ^6.10.1
+        specifier: 6.13.1
         version: 6.13.1(magicast@0.3.5)(rollup@4.32.0)(ts-node@10.9.2(@types/node@22.10.10)(typescript@5.7.3))
       '@vue/test-utils':
-        specifier: ^2.4.3
+        specifier: 2.4.6
         version: 2.4.6
       vitest:
-        specifier: ^1.0.4
+        specifier: 1.6.0
         version: 1.6.0(@types/node@22.10.10)(terser@5.37.0)
+
+  apps/rag: {}
 
   packages/chat-api:
     dependencies:
