@@ -90,7 +90,7 @@ const schema = ref(`const userSchema = z.object({
   });`)
 const instructions = ref('')
 
-const {form, generateForm} = useGenerateForm(schema, instructions)
+const { form, generateForm } = useGenerateForm(schema, instructions)
 
 const handleSchemaInput = () => {
   if (schema.value.length > 0 && step.value === 3) {
@@ -103,5 +103,4 @@ const handleInstructionsInput = () => {
     step.value = 6
   }
 }
-
 </script>
