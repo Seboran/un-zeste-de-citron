@@ -10,5 +10,6 @@ export default defineNuxtConfig({
     mistralApiKey: '',
     mistralApiEndpoint: '',
     mistralAgentId: '',
+    mistralTestAgentId: '',
   },
 })

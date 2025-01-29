@@ -10,7 +10,7 @@
       <p class="text-orange-600/80">Generating your form...</p>
     </div>
     
-    <div v-else-if="form.generated">
+    <div>
       <div class="space-y-6">
         <div class="border border-orange-200 rounded-lg shadow-sm">
           <div class="p-4 border-b border-orange-100 bg-orange-50/50">
@@ -18,15 +18,6 @@
           </div>
           <div class="p-4 bg-white">
             <pre class="text-sm overflow-x-auto font-mono"><code>{{ form.vueCode }}</code></pre>
-          </div>
-        </div>
-
-        <div class="border border-orange-200 rounded-lg shadow-sm">
-          <div class="p-4 border-b border-orange-100 bg-orange-50/50">
-            <h3 class="text-sm font-medium text-orange-900">Zod Configuration</h3>
-          </div>
-          <div class="p-4 bg-white">
-            <pre class="text-sm overflow-x-auto font-mono"><code>{{ form.zodConfig }}</code></pre>
           </div>
         </div>
 
@@ -41,9 +32,6 @@
       </div>
     </div>
     
-    <div v-else class="text-center text-orange-600/80 py-12 border border-orange-200 rounded-lg bg-orange-50/50">
-      Enter your schema and instructions, then click "Generate Form" to see the results here.
-    </div>
   </div>
 </template>
 

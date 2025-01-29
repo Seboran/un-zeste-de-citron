@@ -52,8 +52,8 @@ const schema = ref(`const userSchema = z.object({
 const instructions = ref('')
 const form = useFormStore()
 
-const generateForm = () => {
-  form.generateForm({
+const generateForm = async () => {
+  await form.generateForm({
     schema: schema.value,
     instructions: instructions.value,
   })

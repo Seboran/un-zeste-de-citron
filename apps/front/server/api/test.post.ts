@@ -1,11 +1,11 @@
 import { useChatFunction } from '../useChatFunction'
 
 export default defineEventHandler(async (event) => {
-  const { mistralAgentId, mistralApiEndpoint, mistralApiKey } = useRuntimeConfig(event)
+  const { mistralApiEndpoint, mistralTestAgentId, mistralApiKey } = useRuntimeConfig(event)
 
   const { post } = useChatFunction({
     apiKey: mistralApiKey,
-    MISTRAL_AGENT_ID: mistralAgentId,
+    MISTRAL_AGENT_ID: mistralTestAgentId,
     MISTRAL_API_ENDPOINT: mistralApiEndpoint,
   })
 
