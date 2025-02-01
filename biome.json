@@ -17,13 +17,13 @@
       "**/pnpm-lock.yaml",
       "**/.next",
       "**/.unlighthouse",
-      "packages/nirina-codemods/__testfixtures__",
       "**/bruno/**",
       "**/.venv",
       "**/*.md",
       "**/*.mdx",
       "**/.astro",
-      "**/matrix.json"
+      "**/matrix.json",
+      "**/resources/form/**"
     ]
   },
   "organizeImports": { "enabled": true },
