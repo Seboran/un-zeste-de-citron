@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { GenerateRequestBody, GenerateResponseBody } from '~~/server/api/generate.post'
+import type { TestRequestBody, TestResponseBody } from '~~/server/api/test.post'
 
 interface GenerateFormParams {
   schema: string
@@ -38,6 +39,27 @@ export const useFormStore = defineStore('form', () => {
       state.generated = true
     }
   }
+  async function generateTest() {
+    state.loading = true
+    state.error = null
+
+    const body: TestRequestBody = {
+      form: state.vueCode,
+    }
+    try {
+      const response = await $fetch<TestResponseBody>('/api/test', {
+        method: 'POST',
+        body,
+      })
+      state.tests = response.answer
+    } catch (error) {
+      console.error('Error while fetching Mistral AI response:', error)
+      state.tests = "Mon chatbot a un peu du mal 💀. N'hésitez pas à naviguer via le menu en haut !"
+    } finally {
+      state.loading = false
+      state.generated = true
+    }
+  }
 
   function reset() {
     state.vueCode = ''
@@ -46,6 +68,7 @@ export const useFormStore = defineStore('form', () => {
 
   return {
     generateForm,
+    generateTest,
     reset,
     vueCode: computed(() => state.vueCode),
     error: computed(() => state.error),

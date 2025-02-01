@@ -1,20 +1,29 @@
-import { useChatFunction } from '../useChatFunction'
+export type TestRequestBody = {
+  form: string
+}
 
-export default defineEventHandler(async (event) => {
-  const { mistralApiEndpoint, mistralTestAgentId, mistralApiKey } = useRuntimeConfig(event)
+export type TestResponseBody = {
+  answer: string
+}
 
-  const { post } = useChatFunction({
-    apiKey: mistralApiKey,
-    MISTRAL_AGENT_ID: mistralTestAgentId,
-    MISTRAL_API_ENDPOINT: mistralApiEndpoint,
-  })
+/**
+ * Returns a `TestRequestBody` obje
+ */
+export default defineEventHandler<{ body: TestRequestBody }>(
+  async (event): Promise<TestResponseBody> => {
+    const { ragEndpoint } = useRuntimeConfig(event)
 
-  try {
-    return await post(toWebRequest(event))
-  } catch (error) {
-    throw createError({
-      statusCode: 400,
-      message: error instanceof Error ? error.message : 'Invalid request',
-    })
-  }
-})
+    try {
+      const body = await readBody(event)
+      return await $fetch(ragEndpoint + '/api/test', {
+        method: 'POST',
+        body,
+      })
+    } catch (error) {
+      throw createError({
+        statusCode: 400,
+        message: error instanceof Error ? error.message : 'Invalid request',
+      })
+    }
+  },
+)

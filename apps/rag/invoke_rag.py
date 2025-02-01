@@ -1,5 +1,5 @@
 import os
-from apps.rag.SYSTEM_PROMPT import SYSTEM_PROMPT
+from SYSTEM_PROMPT import TEST_BUILDING_SYSTEM_PROMPT, VUEJS_BUILDING_SYSTEM_PROMPT
 from dotenv import load_dotenv
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -17,6 +17,7 @@ MISTRAL_MODEL = "mistral-large-latest"
 
 def create_rag_system(
     folder_path: str,
+    system_prompt: str,
     embedding_model: str = "mistral",
     llm_model: str = "mistral",
     api_key: str = None
@@ -58,7 +59,7 @@ def create_rag_system(
 
     # Define prompt template
 
-    prompt = ChatPromptTemplate.from_template(SYSTEM_PROMPT)
+    prompt = ChatPromptTemplate.from_template(system_prompt)
 
     # Create retrieval chain
     document_chain = create_stuff_documents_chain(model, prompt)
@@ -85,14 +86,24 @@ if not api_key:
     raise ValueError(
         "NUXT_MISTRAL_API_KEY is missing. Set it in the .env file.")
 
-rag_system = create_rag_system(
-    folder, embedding_model="mistral", llm_model="mistral", api_key=api_key)
+vuejsFormBuilder = create_rag_system(
+    folder, embedding_model="mistral", llm_model="mistral", api_key=api_key, system_prompt=VUEJS_BUILDING_SYSTEM_PROMPT)
 
 
 @retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(5))
-def invoke_rag(input_data):
+def get_form_from_input(zod_schema: str):
     """Takes a string input and returns a response based on the rag_system"""
-    return rag_system.invoke({"input": input_data})["answer"]
+    return vuejsFormBuilder.invoke({"input": zod_schema})["answer"]
+
+
+unitTestFormBuilder = create_rag_system(
+    folder, embedding_model="mistral", llm_model="mistral", api_key=api_key, system_prompt=TEST_BUILDING_SYSTEM_PROMPT)
+
+
+@retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(5))
+def get_tests_from_input_data_and_form(input_data: str):
+    """Takes a string input and returns a response based on the rag_system"""
+    return unitTestFormBuilder.invoke({"input": "```vuejs\n" + input_data + "\n```"})["answer"]
 
 
 # response = invoke_rag('''
