@@ -1,11 +1,3 @@
-```ts
-const userSchema = z.object({
-  username: z.string().min(3).max(20),
-  email: z.string().email(),
-  age: z.number().min(18)
-});
-```
-```vue
 <template>
   <form @submit.prevent="submit">
     <input v-model="user.username" type="text" placeholder="Username" />
@@ -40,4 +32,3 @@ const submit = () => {
   }
 };
 </script>
-```

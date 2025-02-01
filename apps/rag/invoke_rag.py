@@ -23,7 +23,7 @@ def create_rag_system(
     # Load all Markdown files
     documents = []
     for file in os.listdir(folder_path):
-        if file.endswith(".md"):
+        if file.endswith(".vue"):
             loader = TextLoader(os.path.join(folder_path, file))
             documents.extend(loader.load())
 
@@ -53,7 +53,11 @@ def create_rag_system(
         raise ValueError("Unsupported LLM model")
 
     # Define prompt template
-    prompt = ChatPromptTemplate.from_template("""You are an assistant that transforms zod schemas into vuejs components in vue3 with script setups
+    prompt = ChatPromptTemplate.from_template("""You are an assistant that transforms zod schemas into vuejs components in vue3 with script setups.
+                                              
+    IMPORTANT: only answer with vue3 component. No written text.
+                                              
+    Respect accessibility rules.
 
     <context>
     {context}

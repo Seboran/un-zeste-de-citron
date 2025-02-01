@@ -1,11 +1,3 @@
-```ts
-import { z } from "zod";
-
-export const usernameSchema = z.object({
-  username: z.string().min(1, "Username is required"),
-});
-```
-```vue
 <template>
   <form @submit.prevent="handleSubmit">
     <div>
@@ -64,4 +56,3 @@ const handleSubmit = () => {
   }
 };
 </script>
-```
