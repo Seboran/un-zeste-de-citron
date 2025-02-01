@@ -1,6 +1,5 @@
-import { generateVuejsForm } from '@zeste/chat-api'
 import { defineStore } from 'pinia'
-import { API_GENERATE_CODE, API_GENERATE_TEST } from '../utils/EndpointConstants'
+import type { GenerateRequestBody, GenerateResponseBody } from '~~/server/api/generate.post'
 
 interface GenerateFormParams {
   schema: string
@@ -17,36 +16,23 @@ export const useFormStore = defineStore('form', () => {
     error: null,
   })
 
-  const { generateForm: callApi } = generateVuejsForm({ api: API_GENERATE_CODE })
-
-  const { decodeStream } = useDecodeStream(toRef(state, 'vueCode'))
-
-  async function generateForm({ schema, instructions }: GenerateFormParams) {
+  async function generateForm({ schema, instructions: _instructions }: GenerateFormParams) {
     state.loading = true
     state.error = null
 
+    const body: GenerateRequestBody = {
+      schema,
+    }
     try {
-      await decodeStream(await callApi({ schema, instructions }))
+      const response = await $fetch<GenerateResponseBody>('/api/generate', {
+        method: 'POST',
+        body,
+      })
+      state.vueCode = response.answer
     } catch (error) {
       console.error('Error while fetching Mistral AI response:', error)
       state.vueCode =
         "Mon chatbot a un peu du mal 💀. N'hésitez pas à naviguer via le menu en haut !"
-    } finally {
-      state.loading = false
-      state.generated = true
-    }
-  }
-
-  const { generateForm: callTestApi } = generateVuejsForm({ api: API_GENERATE_TEST })
-  const { decodeStream: decodeStreamTest } = useDecodeStream(toRef(state, 'tests'))
-
-  async function generateTestForm({ schema }: { schema: string }) {
-    console.log('yo')
-    try {
-      await decodeStreamTest(await callTestApi({ schema, instructions: state.vueCode }))
-    } catch (error) {
-      console.error('Error while fetching Mistral AI response:', error)
-      state.tests = "Mon chatbot a un peu du mal 💀. N'hésitez pas à naviguer via le menu en haut !"
     } finally {
       state.loading = false
       state.generated = true
@@ -60,7 +46,6 @@ export const useFormStore = defineStore('form', () => {
 
   return {
     generateForm,
-    generateTestForm,
     reset,
     vueCode: computed(() => state.vueCode),
     error: computed(() => state.error),

@@ -51,14 +51,12 @@ const userSchema = z.object({
           class="w-full rounded-lg border border-orange-200 focus:border-orange-400 focus:ring focus:ring-orange-200 bg-white shadow-sm resize-none text-sm p-3"
           rows="3"
           placeholder="Example: I want a registration form with email validation and a minimum age requirement..."
-          @input="handleInstructionsInput"
         ></textarea>
       </div>
     </div>
 
     <!-- Generate Button -->
     <button
-      v-if="step >= 6"
       @click="generateForm"
       :disabled="form.loading"
       class="w-full mt-4 py-2.5 px-4 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-medium rounded-lg transition-colors relative"
@@ -95,12 +93,6 @@ const { form, generateForm } = useGenerateForm(schema, instructions)
 const handleSchemaInput = () => {
   if (schema.value.length > 0 && step.value === 3) {
     step.value = 4
-  }
-}
-
-const handleInstructionsInput = () => {
-  if (instructions.value.length > 0 && step.value === 5) {
-    step.value = 6
   }
 }
 </script>

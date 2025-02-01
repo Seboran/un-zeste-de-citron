@@ -8,10 +8,6 @@ export function useGenerateForm(schema: Ref<string>, instructions: Ref<string>) 
       schema: schema.value,
       instructions: instructions.value,
     })
-
-    await formStore.generateTestForm({
-      schema: schema.value,
-    })
   }
 
   return {

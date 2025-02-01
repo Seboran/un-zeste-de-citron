@@ -76,7 +76,7 @@ def create_rag_system(
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Define the relative path to the resources folder
-folder = os.path.join(script_dir, "resources")
+folder = os.path.join(script_dir, "resources/form")
 
 # Load environment variables from .env file
 load_dotenv()
@@ -89,18 +89,17 @@ if not api_key:
     raise ValueError(
         "NUXT_MISTRAL_API_KEY is missing. Set it in the .env file.")
 
-
 rag_system = create_rag_system(
     folder, embedding_model="mistral", llm_model="mistral", api_key=api_key)
 
 
 @retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(5))
 def invoke_rag(input_data):
-    response = rag_system.invoke({"input": input_data})
-    return response["answer"]
+    """Takes a string input and returns a response based on the rag_system"""
+    return rag_system.invoke({"input": input_data})["answer"]
 
 
-# response = invoke_with_retry('''
+# response = invoke_rag('''
 # import { z } from "zod";
 
 # export const registerSchema = z.object({
@@ -110,5 +109,5 @@ def invoke_rag(input_data):
 #   password: z.string().min(6, "Password must be at least 6 characters"),
 # });
 
-# ''')
+# ''', rag_system=rag_system)
 # print(response)

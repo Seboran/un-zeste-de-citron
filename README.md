@@ -7,3 +7,10 @@ Tired of writing web forms? Generate yours!
 - `vue.js` form generation
 - `zod` integration
 - unit tests with `testing-library`
+
+## Local run
+
+```sh
+pnpm i
+pnpm dev
+```
