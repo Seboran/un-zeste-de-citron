@@ -12,5 +12,6 @@ Tired of writing web forms? Generate yours!
 
 ```sh
 pnpm i
+pip install -r requirements.txt
 pnpm dev
 ```
