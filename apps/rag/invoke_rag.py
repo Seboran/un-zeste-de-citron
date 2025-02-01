@@ -1,4 +1,5 @@
 import os
+from apps.rag.SYSTEM_PROMPT import SYSTEM_PROMPT
 from dotenv import load_dotenv
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -10,6 +11,8 @@ from langchain_mistralai.chat_models import ChatMistralAI
 from langchain_mistralai.embeddings import MistralAIEmbeddings
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from tenacity import retry, stop_after_attempt, wait_exponential
+
+MISTRAL_MODEL = "mistral-large-latest"
 
 
 def create_rag_system(
@@ -46,27 +49,16 @@ def create_rag_system(
 
     # Choose LLM
     if llm_model == "mistral":
-        model = ChatMistralAI(mistral_api_key=api_key)
+        model = ChatMistralAI(mistral_api_key=api_key,
+                              model=MISTRAL_MODEL)
     elif llm_model == "openai":
         model = ChatOpenAI(openai_api_key=api_key)
     else:
         raise ValueError("Unsupported LLM model")
 
     # Define prompt template
-    prompt = ChatPromptTemplate.from_template("""You are an assistant that transforms zod schemas into vuejs components in vue3 with script setups.
-                                              
-    IMPORTANT: only answer with vue3 component. No written text.
-                                              
-    Respect accessibility rules.
 
-    <context>
-    {context}
-    </context>
-
-    Transform the following zod schema:
-    ```ts
-    {input}
-    ```""")
+    prompt = ChatPromptTemplate.from_template(SYSTEM_PROMPT)
 
     # Create retrieval chain
     document_chain = create_stuff_documents_chain(model, prompt)
