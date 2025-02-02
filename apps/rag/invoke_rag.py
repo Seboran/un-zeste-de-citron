@@ -12,7 +12,7 @@ from langchain_mistralai.embeddings import MistralAIEmbeddings
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-MISTRAL_MODEL = "mistral-large-latest"
+MISTRAL_MODEL = "codestral-latest"
 
 
 def create_rag_system(
