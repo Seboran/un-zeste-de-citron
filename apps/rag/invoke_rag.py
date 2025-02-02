@@ -9,7 +9,6 @@ from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_mistralai.chat_models import ChatMistralAI
 from langchain_mistralai.embeddings import MistralAIEmbeddings
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 MISTRAL_MODEL = "codestral-latest"
@@ -39,8 +38,6 @@ def create_rag_system(
     if embedding_model == "mistral":
         embeddings = MistralAIEmbeddings(
             model="mistral-embed", mistral_api_key=api_key)
-    elif embedding_model == "openai":
-        embeddings = OpenAIEmbeddings(openai_api_key=api_key)
     else:
         raise ValueError("Unsupported embedding model")
 
@@ -52,8 +49,6 @@ def create_rag_system(
     if llm_model == "mistral":
         model = ChatMistralAI(mistral_api_key=api_key,
                               model=MISTRAL_MODEL)
-    elif llm_model == "openai":
-        model = ChatOpenAI(openai_api_key=api_key)
     else:
         raise ValueError("Unsupported LLM model")
 

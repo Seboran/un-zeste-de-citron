@@ -1,14 +1,10 @@
-numpy==2.2.2;
 Flask>=2.0;
 flask-cors>=3.0;
-PuLP==2.9.0;
 langchain==0.3.16;
 langchain-community==0.3.16;
 langchain-mistralai==0.2.5;
-langchain-openai==0.3.2;
 faiss-cpu==1.9.0.post1;
 tiktoken==0.8.0;
-openai==1.60.2;
 mistralai==1.5.0;
 python-dotenv==1.0.1;
 tenacity==9.0.0;
