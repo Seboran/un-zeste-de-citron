@@ -1,0 +1,6 @@
+services:
+  - name: front
+    envs:
+      - key: NODE_MODULES_CACHE
+        scope: BUILD_TIME
+        value: false
