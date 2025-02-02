@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, shallowRef, watch } from 'vue';
+import { defineAsyncComponent, shallowRef, watch } from 'vue'
 
 const props = defineProps<{
   formCode: string

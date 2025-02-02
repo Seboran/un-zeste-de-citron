@@ -1,0 +1,15 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "env": [
+        "NUXT_RAG_ENDPOINT",
+        "NUXT_MISTRAL_API_KEY",
+        "NUXT_MISTRAL_API_ENDPOINT",
+        "NUXT_MISTRAL_AGENT_ID",
+        "NUXT_MISTRAL_TEST_AGENT_ID"
+      ]
+    }
+  }
+}
