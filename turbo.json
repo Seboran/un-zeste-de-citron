@@ -4,11 +4,7 @@
     "build": {
       "outputs": [
         "dist/**",
-        ".output/**",
-        ".vitepress/dist/**",
-        ".next/**",
-        "!.next/cache/**",
-        ".netlify/build"
+        ".output/**"
       ],
       "dependsOn": ["^build"]
     },
