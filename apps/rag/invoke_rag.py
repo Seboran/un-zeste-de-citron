@@ -14,6 +14,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 MISTRAL_MODEL = "codestral-latest"
 
 
+@retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(5))
 def create_rag_system(
     folder_path: str,
     system_prompt: str,
