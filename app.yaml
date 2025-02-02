@@ -1,5 +1,5 @@
 services:
-  - name: front
+  - name: un-zeste-de-citron-front
     envs:
       - key: NODE_MODULES_CACHE
         scope: BUILD_TIME
