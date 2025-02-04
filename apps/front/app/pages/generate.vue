@@ -14,7 +14,7 @@
 
         <!-- Right Column (Auto Width) -->
         <div class="flex-1 overflow-hidden bg-white rounded-sm shadow-sm p-6">
-          <GeneratedForm />
+          <DisplayGeneratedForm />
         </div>
       </div>
 

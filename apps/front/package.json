@@ -19,10 +19,12 @@
     "marked": "^12.0.0",
     "nuxt": "^3.13.0",
     "pinia": "^2.1.7",
+    "prismjs": "^1.29.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.13.1",
+    "@types/prismjs": "^1.26.5",
     "@vue/test-utils": "2.4.6",
     "vitest": "1.6.0"
   }

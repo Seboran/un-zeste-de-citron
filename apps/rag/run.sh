@@ -1,1 +1,1 @@
-python -m flask --app api/index.py run -p 5328
+python -m flask --app app.py run -p 5328
