@@ -52,7 +52,7 @@ importers:
         specifier: 6.13.1
         version: 6.13.1(magicast@0.3.5)(rollup@4.34.2)(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.3))
       '@types/prismjs':
-        specifier: ^1.26.5
+        specifier: 1.26.5
         version: 1.26.5
       '@vue/test-utils':
         specifier: 2.4.6
@@ -95,43 +95,43 @@ importers:
         version: 3.5.13(typescript@5.7.3)
     devDependencies:
       '@tsconfig/node22':
-        specifier: ^22.0.0
+        specifier: 22.0.0
         version: 22.0.0
       '@types/jsdom':
-        specifier: ^21.1.7
+        specifier: 21.1.7
         version: 21.1.7
       '@types/node':
-        specifier: ^22.10.7
+        specifier: 22.10.10
         version: 22.10.10
       '@vitejs/plugin-vue':
-        specifier: ^5.2.1
+        specifier: 5.2.1
         version: 5.2.1(vite@6.0.11(@types/node@22.10.10)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
       '@vue/test-utils':
-        specifier: ^2.4.6
+        specifier: 2.4.6
         version: 2.4.6
       '@vue/tsconfig':
-        specifier: ^0.7.0
+        specifier: 0.7.0
         version: 0.7.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
       jsdom:
-        specifier: ^26.0.0
+        specifier: 26.0.0
         version: 26.0.0
       npm-run-all2:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
       typescript:
-        specifier: ~5.7.3
+        specifier: 5.7.3
         version: 5.7.3
       vite:
-        specifier: ^6.0.11
+        specifier: 6.0.11
         version: 6.0.11(@types/node@22.10.10)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
       vite-plugin-vue-devtools:
-        specifier: ^7.7.0
+        specifier: 7.7.1
         version: 7.7.1(rollup@4.34.2)(vite@6.0.11(@types/node@22.10.10)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
       vitest:
         specifier: ^3.0.2
         version: 3.0.4(@types/node@22.10.10)(jiti@2.4.2)(jsdom@26.0.0)(terser@5.37.0)(yaml@2.7.0)
       vue-tsc:
-        specifier: ^2.2.0
+        specifier: 2.2.0
         version: 2.2.0(typescript@5.7.3)
 
 packages:
@@ -4739,9 +4739,6 @@ packages:
     resolution: {integrity: sha512-60HTx5ID+fLRcgdHfmz0LDZAXYEV68fzwG0JWwEPBode9NuMYTIxuYXPg4ngO8i8+Ou0lM7y6GzaYWbiDL0drw==}
     hasBin: true
 
-  vscode-uri@3.0.8:
-    resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
-
   vscode-uri@3.1.0:
     resolution: {integrity: sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==}
 
@@ -6050,7 +6047,7 @@ snapshots:
 
   '@types/http-proxy@1.17.15':
     dependencies:
-      '@types/node': 22.13.1
+      '@types/node': 22.10.10
 
   '@types/jsdom@21.1.7':
     dependencies:
@@ -6065,6 +6062,7 @@ snapshots:
   '@types/node@22.13.1':
     dependencies:
       undici-types: 6.20.0
+    optional: true
 
   '@types/parse-path@7.0.3': {}
 
@@ -6240,7 +6238,7 @@ snapshots:
     dependencies:
       '@volar/language-core': 2.4.11
       path-browserify: 1.0.1
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@vue-macros/common@1.16.1(vue@3.5.13(typescript@5.7.3))':
     dependencies:
@@ -6322,7 +6320,7 @@ snapshots:
 
   '@vue/devtools-core@7.6.8(vite@6.0.11(@types/node@22.13.1)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))':
     dependencies:
-      '@vue/devtools-kit': 7.6.8
+      '@vue/devtools-kit': 7.7.1
       '@vue/devtools-shared': 7.7.1
       mitt: 3.0.1
       nanoid: 5.0.9
@@ -9981,7 +9979,7 @@ snapshots:
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.1
-      rollup: 4.32.0
+      rollup: 4.34.2
     optionalDependencies:
       '@types/node': 22.10.10
       fsevents: 2.3.3
@@ -9993,7 +9991,7 @@ snapshots:
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.1
-      rollup: 4.32.0
+      rollup: 4.34.2
     optionalDependencies:
       '@types/node': 22.13.1
       fsevents: 2.3.3
@@ -10095,8 +10093,6 @@ snapshots:
   vscode-languageserver@7.0.0:
     dependencies:
       vscode-languageserver-protocol: 3.16.0
-
-  vscode-uri@3.0.8: {}
 
   vscode-uri@3.1.0: {}
 
