@@ -1,6 +1,6 @@
 Flask>=2.0;
 flask-cors>=3.0;
-langchain==0.3.16;
+langchain==0.3.18;
 langchain-community==0.3.16;
 langchain-mistralai==0.2.5;
 faiss-cpu==1.9.0.post1;
