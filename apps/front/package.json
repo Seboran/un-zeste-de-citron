@@ -26,6 +26,6 @@
     "@nuxtjs/tailwindcss": "6.13.1",
     "@types/prismjs": "1.26.5",
     "@vue/test-utils": "2.4.6",
-    "vitest": "1.6.0"
+    "vitest": "1.6.1"
   }
 }
